@@ -6,26 +6,43 @@ var cars = {};
 
 // Class of car
 class Car {
-  constructor(id, make, color, milage, date) {
-    this.id = id;
-    this.make = make;
-    this.color = color;
-    this.milage = milage;
-    this.date = date;
+  constructor() {
+    this.id = this.generateID();
+    this.make = this.generateMake();
+    this.color = this.generateColor();
+    this.milage = this.generateMilage();
+    this.date = todays_date();
   }
 
+  generateID (){
+    var id = (todays_date() + total_cars_registered);
+    total_cars_registered += 1;
+    return id
+  }
 
+  generateMake () {
+    var make = $('#car_make').val();
+    return make
+  }
+
+  generateColor () {
+    var color = $('#car_color').val();
+    return color
+  }
+
+  generateMilage () {
+    var milage = $('#car_milage').val();
+    return milage
+  }
 }
 
-// Getting unique ID number using the date & total cars sold
-function generateID (){
+function todays_date (){
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth()+1).padStart(2, '0');
   var yyyy = today.getFullYear();
-  id = yyyy + mm + dd + '-' + total_cars_registered
-  total_cars_registered += 1;
-  return id
+  var date = yyyy + mm + dd
+  return date
 }
 
 // On click from form submission
@@ -33,13 +50,9 @@ $('#enter_car').submit(function(event){
   event.preventDefault()
   console.log("Sucess!")
 
-  var id = generateID()
-  var make = $('#car_make').val();
-  var color = $('#car_color').val();
-  var milage = $('#car_milage').val();
-
-
-  car = new Car (id, make, color, milage, 23)
-  cars[id] = car
-  $('#info_box').html(`You have submitted a: ${car.make} that is ${car.color} and has driven ${car.milage} miles`)
+  car = new Car
+  cars[car.id] = car
+  $('#info_box').html(`You have submitted a: ${car.color} ${car.make} that has driven ${car.milage} miles. <br>
+    The ID number is: ${car.id} <br>
+    The Date today is: ${car.date}`)
 });
