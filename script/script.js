@@ -55,9 +55,11 @@ function delete_car(car_to_delete) {
     console.log("Car not found")
     return
   }
-
+  var car = cars_by_id[car_to_delete]
   // If car was found, deletes from id dictionary
-  delete cars_by_id[car_to_delete]
+  delete cars_by_id[car.id]
+
+  delete cars_by_color[car.color]
 
   // Deletes cars from list: cars_by_date
   for (i = 0; i < cars_by_date.length; i++) {
@@ -67,6 +69,7 @@ function delete_car(car_to_delete) {
     }
   }
 
+  return car
 }
 
 // On click from form submission
@@ -83,7 +86,7 @@ $('#enter_car').submit(function(event){
     The ID number is: ${car.id} <br>
     The Date today is: ${car.date}`)
 
-  console.log(cars_by_date, cars_by_id)
+  console.log(cars_by_date, cars_by_id, cars_by_color)
 });
 
 $('#delete_car').submit(function(event) {
@@ -92,5 +95,6 @@ $('#delete_car').submit(function(event) {
   delete_car(car_to_delete);
   console.log(cars_by_date)
   console.log(cars_by_id)
+  console.log(cars_by_color)
 
 })
