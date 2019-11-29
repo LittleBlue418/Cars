@@ -65,7 +65,7 @@ function delete_car(car_to_delete) {
   for (i = 0; i < cars_by_date.length; i++) {
     var car = cars_by_date[i]
     if (car.id === car_to_delete) {
-      cars_by_date.splice(i)
+      cars_by_date.splice(i,1)
       console.log(i)
     }
   }
