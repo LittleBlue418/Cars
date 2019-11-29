@@ -66,10 +66,21 @@ function delete_car(car_to_delete) {
     var car = cars_by_date[i]
     if (car.id === car_to_delete) {
       cars_by_date.splice(i)
+      console.log(i)
     }
   }
 
   return car
+}
+
+function populate_car_list() {
+  $('#car_list').html("")
+  var s = ""
+  for (i = 0; i < cars_by_date.length; i++) {
+    var car = cars_by_date[i]
+    s += `<div>${car.id}  -  ${car.make}  -  ${car.color}  -  ${car.milage}</div>`
+  }
+  $('#car_list').html(s)
 }
 
 // On click from form submission
@@ -79,22 +90,34 @@ $('#enter_car').submit(function(event){
 
   var car = new Car
   cars_by_id[car.id] = car
-  cars_by_color[car.color] = car
   cars_by_date.push(car)
+
+  if (cars_by_color[car.color] === undefined) {
+    cars_by_color[car.color] = [car]
+  } else [
+    cars_by_color[car.color].push(car)
+  ]
+
 
   $('#info_box').html(`You have submitted a: ${car.color} ${car.make} that has driven ${car.milage} miles. <br>
     The ID number is: ${car.id} <br>
     The Date today is: ${car.date}`)
 
-  console.log(cars_by_date, cars_by_id, cars_by_color)
+  populate_car_list();
+  console.log(cars_by_color)
 });
 
+// On click from delete
 $('#delete_car').submit(function(event) {
   event.preventDefault()
   var car_to_delete = $('#car_id').val()
-  delete_car(car_to_delete);
+  var car = delete_car(car_to_delete);
+  if (car === undefined) {
+    $('#info_box2').html(`Car not found`)
+  } else {
+    $('#info_box2').html(`You have deleted ${car.id}`)
+  }
   console.log(cars_by_date)
-  console.log(cars_by_id)
-  console.log(cars_by_color)
+  populate_car_list();
 
 })
