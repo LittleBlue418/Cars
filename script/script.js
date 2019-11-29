@@ -49,12 +49,24 @@ function todays_date (){
 }
 
 function delete_car(car_to_delete) {
+  // Checks the number you have input
+  // Returns if no car found
+  if (cars_by_id[car_to_delete] === undefined) {
+    console.log("Car not found")
+    return
+  }
+
+  // If car was found, deletes from id dictionary
+  delete cars_by_id[car_to_delete]
+
+  // Deletes cars from list: cars_by_date
   for (i = 0; i < cars_by_date.length; i++) {
     var car = cars_by_date[i]
     if (car.id === car_to_delete) {
       cars_by_date.splice(i)
     }
   }
+
 }
 
 // On click from form submission
@@ -71,7 +83,7 @@ $('#enter_car').submit(function(event){
     The ID number is: ${car.id} <br>
     The Date today is: ${car.date}`)
 
-  console.log(cars_by_date)
+  console.log(cars_by_date, cars_by_id)
 });
 
 $('#delete_car').submit(function(event) {
@@ -79,5 +91,6 @@ $('#delete_car').submit(function(event) {
   var car_to_delete = $('#car_id').val()
   delete_car(car_to_delete);
   console.log(cars_by_date)
+  console.log(cars_by_id)
 
 })
