@@ -2,7 +2,10 @@
 var total_cars_registered = 0;
 
 // Global dictionary to store all car objects
-var cars = {};
+var cars_by_id = {};
+var cars_by_color = {};
+var cars_by_date = [];
+
 
 // Class of car
 class Car {
@@ -45,14 +48,36 @@ function todays_date (){
   return date
 }
 
+function delete_car(car_to_delete) {
+  for (i = 0; i < cars_by_date.length; i++) {
+    var car = cars_by_date[i]
+    if (car.id === car_to_delete) {
+      cars_by_date.splice(i)
+    }
+  }
+}
+
 // On click from form submission
 $('#enter_car').submit(function(event){
   event.preventDefault()
   console.log("Sucess!")
 
-  car = new Car
-  cars[car.id] = car
+  var car = new Car
+  cars_by_id[car.id] = car
+  cars_by_color[car.color] = car
+  cars_by_date.push(car)
+
   $('#info_box').html(`You have submitted a: ${car.color} ${car.make} that has driven ${car.milage} miles. <br>
     The ID number is: ${car.id} <br>
     The Date today is: ${car.date}`)
+
+  console.log(cars_by_date)
 });
+
+$('#delete_car').submit(function(event) {
+  event.preventDefault()
+  var car_to_delete = $('#car_id').val()
+  delete_car(car_to_delete);
+  console.log(cars_by_date)
+
+})
