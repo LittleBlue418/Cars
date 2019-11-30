@@ -63,8 +63,7 @@ function delete_car(car_to_delete) {
 
   // Deletes cars from list: cars_by_date
   for (i = 0; i < cars_by_date.length; i++) {
-    var car = cars_by_date[i]
-    if (car.id === car_to_delete) {
+    if (cars_by_date[i].id === car_to_delete) {
       cars_by_date.splice(i,1)
       console.log(i)
     }
@@ -84,19 +83,30 @@ function populate_car_list() {
 }
 
 // On click from form submission
+// 'Event' is an object that contains details about the event
+// That just happened. Generated when we do something with the page
+// This one is tied to the specific submit button on the form
+// We can use it to find out stuff and do stuff
+// Here we use it to prevent the default behaviour
 $('#enter_car').submit(function(event){
   event.preventDefault()
   console.log("Sucess!")
 
   var car = new Car
+  // We use the square brackets to add to a dictionary
+  // whatever is in the square brackets is the key, and then after the
+  // Equals sign is the value
   cars_by_id[car.id] = car
   cars_by_date.push(car)
 
   if (cars_by_color[car.color] === undefined) {
+    // Here car is in brackets to make sure we create a list rather than
+    // Over writing the previous object with key 'red'
     cars_by_color[car.color] = [car]
-  } else [
+  } else {
+    // Appending to a list as with cars by date
     cars_by_color[car.color].push(car)
-  ]
+  }
 
 
   $('#info_box').html(`You have submitted a: ${car.color} ${car.make} that has driven ${car.milage} miles. <br>
