@@ -75,10 +75,10 @@ function delete_car(car_to_delete) {
 function populate_car_list() {
   $('#car_list').html("")
   var s = ""
-  for (i = 0; i < cars_by_date.length; i++) {
-    var car = cars_by_date[i]
+  // 'car' here is the same as 'cars_by_date[i]' in the old function
+  cars_by_date.forEach(car => {
     s += `<div>${car.id}  -  ${car.make}  -  ${car.color}  -  ${car.milage}</div>`
-  }
+  })
   $('#car_list').html(s)
 }
 
