@@ -8,7 +8,10 @@ var cars_by_date = [];
 
 
 // Class of car
-class Car {
+for (i = 0; i < cars_by_date.length; i++) {
+  var car = cars_by_date[i]
+  s += `<div>${car.id}  -  ${car.make}  -  ${car.color}  -  ${car.milage}</div>`
+}class Car {
   constructor() {
     this.id = this.generateID();
     this.make = this.generateMake();
@@ -61,13 +64,9 @@ function delete_car(car_to_delete) {
 
   delete cars_by_color[car.color]
 
-  // Deletes cars from list: cars_by_date
-  for (i = 0; i < cars_by_date.length; i++) {
-    if (cars_by_date[i].id === car_to_delete) {
-      cars_by_date.splice(i,1)
-      console.log(i)
-    }
-  }
+  // Use filter method to only keep cars that don't match the
+  // to-delete, and save them back in the same array
+  cars_by_date = cars_by_date.filter(car => car.id !== car_to_delete)
 
   return car
 }
