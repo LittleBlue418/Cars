@@ -9,7 +9,9 @@ class Car {
     this.date = this.todays_date();
   }
 
-  generateID() {
+  // Method is not using the instance (this) so we
+  // Set to a static method
+  static generateID() {
     var id = (Car.todays_date() + total_cars_registered);
     total_cars_registered += 1;
     return id
