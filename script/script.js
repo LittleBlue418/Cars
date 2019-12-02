@@ -8,15 +8,12 @@ var cars_by_date = [];
 
 
 // Class of car
-for (i = 0; i < cars_by_date.length; i++) {
-  var car = cars_by_date[i]
-  s += `<div>${car.id}  -  ${car.make}  -  ${car.color}  -  ${car.milage}</div>`
-}class Car {
-  constructor() {
+class Car {
+  constructor(make, color, milage) {
     this.id = this.generateID();
-    this.make = this.generateMake();
-    this.color = this.generateColor();
-    this.milage = this.generateMilage();
+    this.make = make;
+    this.color = color;
+    this.milage = milage;
     this.date = todays_date();
   }
 
@@ -24,21 +21,6 @@ for (i = 0; i < cars_by_date.length; i++) {
     var id = (todays_date() + total_cars_registered);
     total_cars_registered += 1;
     return id
-  }
-
-  generateMake () {
-    var make = $('#car_make').val();
-    return make
-  }
-
-  generateColor () {
-    var color = $('#car_color').val();
-    return color
-  }
-
-  generateMilage () {
-    var milage = $('#car_milage').val();
-    return milage
   }
 }
 
@@ -91,7 +73,12 @@ $('#enter_car').submit(function(event){
   event.preventDefault()
   console.log("Sucess!")
 
-  var car = new Car
+  var car = new Car(
+    $('#car_make').val(),
+    $('#car_color').val(),
+    $('#car_milage').val()
+  )
+
   // We use the square brackets to add to a dictionary
   // whatever is in the square brackets is the key, and then after the
   // Equals sign is the value
