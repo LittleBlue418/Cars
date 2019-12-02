@@ -33,7 +33,9 @@ class CarCollection {
     // If car was found, deletes from id dictionary
     delete this.cars_by_id[car.id]
 
-    delete this.cars_by_color[car.color]
+    // Bug fix - now filtering the list in the dictionary with the same color key and keeping
+    // cars that do not match id rather than throwing away the whole list
+    this.cars_by_color[car.color] = this.cars_by_color[car.color].filter(car => car.id !== car_to_delete)
 
     // Use filter method to only keep cars that don't match the
     // to-delete, and save them back in the same array
