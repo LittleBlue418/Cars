@@ -1,19 +1,4 @@
 // Classes
-class Car {
-  constructor(make, color, milage) {
-    this.id = this.generateID();
-    this.make = make;
-    this.color = color;
-    this.milage = milage;
-    this.date = todays_date();
-  }
-
-  generateID() {
-    var id = (todays_date() + total_cars_registered);
-    total_cars_registered += 1;
-    return id
-  }
-}
 
 class CarCollection {
   constructor() {
@@ -62,7 +47,6 @@ class CarCollection {
 
 
 // Global variables
-var total_cars_registered = 0;
 var car_collection = new CarCollection;
 
 
@@ -74,14 +58,6 @@ $(function () {
 })
 
 
-function todays_date() {
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0');
-  var yyyy = today.getFullYear();
-  var date = yyyy + mm + dd
-  return date
-}
 
 
 function populate_car_list() {
