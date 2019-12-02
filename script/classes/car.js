@@ -10,12 +10,15 @@ class Car {
   }
 
   generateID() {
-    var id = (this.todays_date() + total_cars_registered);
+    var id = (Car.todays_date() + total_cars_registered);
     total_cars_registered += 1;
     return id
   }
 
-  todays_date() {
+  // Static method - allows us to call the method on Car
+  // without a 'this'
+  // Sits on the class, not the individual instances
+  static todays_date() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
