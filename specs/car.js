@@ -21,4 +21,19 @@ describe("Car class", function() {
     // Testing that the variable increases as it should
     expect(total_cars_registered).toEqual(2)
   })
+
+  it("Should construct a 'car'", function() {
+    total_cars_registered = 1
+    var baseTime = new Date(2019, 09, 23);
+    jasmine.clock().mockDate(baseTime);
+
+    var car = new Car("Ford", "Red", 100)
+
+    expect(car.id).toEqual("201910231")
+    expect(car.make).toEqual("Ford")
+    expect(car.color).toEqual("Red")
+    expect(car.milage).toEqual(100)
+    expect(car.date).toEqual("20191023")
+
+  })
 })

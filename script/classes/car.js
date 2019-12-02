@@ -2,11 +2,11 @@ var total_cars_registered = 0;
 
 class Car {
   constructor(make, color, milage) {
-    this.id = this.generateID();
+    this.id = Car.generateID();
     this.make = make;
     this.color = color;
     this.milage = milage;
-    this.date = this.todays_date();
+    this.date = Car.todays_date();
   }
 
   // Method is not using the instance (this) so we
