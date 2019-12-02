@@ -68,6 +68,8 @@ var car_collection = new CarCollection;
 
 // On load
 $(function () {
+  // Initiating a 'dummy' car
+  car_collection.add_car(new Car ("Ford", "Green", 10000))
   populate_car_list();
 })
 
